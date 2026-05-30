@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ——— Light theme (Telegram Desktop default) ——— */
+:root {
+  --tg-blue: #3390ec;
+  --tg-blue-hover: #2b7fd4;
+  --tg-sidebar: #ffffff;
+  --tg-panel: #f0f2f5;
+  --tg-border: #e4e8eb;
+  --tg-chat-bg: #e6ebee;
+  --tg-outgoing: #effdde;
+  --tg-outgoing-text: #000000;
+  --tg-incoming: #ffffff;
+  --tg-incoming-text: #000000;
+  --tg-muted: #707579;
+  --tg-title: #000000;
+  --tg-search-bg: #f4f4f5;
+  --tg-hover: #f4f4f5;
+  --tg-selected: #3390ec;
+  --tg-selected-text: #ffffff;
+  --tg-online: #4fae4e;
+  --tg-shadow: rgba(16, 35, 47, 0.08);
+  --tg-wallpaper-color: #e6ebee;
+  --tg-wallpaper-pattern: %23c8cdd1;
+  --tg-scrollbar: rgba(0, 0, 0, 0.15);
+  --tg-pill: rgba(255, 255, 255, 0.85);
+  --tg-skeleton: #f4f4f5;
+}
+
+/* ——— Dark theme (Telegram night) ——— */
+.dark {
+  --tg-blue: #6ab3f3;
+  --tg-blue-hover: #5aa8ef;
+  --tg-sidebar: #17212b;
+  --tg-panel: #0e1621;
+  --tg-border: #0e1621;
+  --tg-chat-bg: #0e1621;
+  --tg-outgoing: #2b5278;
+  --tg-outgoing-text: #ffffff;
+  --tg-incoming: #182533;
+  --tg-incoming-text: #ffffff;
+  --tg-muted: #708499;
+  --tg-title: #f5f5f5;
+  --tg-search-bg: #242f3d;
+  --tg-hover: #242f3d;
+  --tg-selected: #2b5278;
+  --tg-selected-text: #ffffff;
+  --tg-online: #4fae4e;
+  --tg-shadow: rgba(0, 0, 0, 0.25);
+  --tg-wallpaper-color: #0e1621;
+  --tg-wallpaper-pattern: %23374751;
+  --tg-scrollbar: rgba(255, 255, 255, 0.12);
+  --tg-pill: rgba(24, 37, 51, 0.92);
+  --tg-skeleton: #242f3d;
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth antialiased h-full overflow-hidden;
+  }
+
+  body {
+    @apply font-tg bg-tg-panel text-tg-title m-0 transition-colors duration-200 h-full overflow-hidden;
+  }
+}
+
+.tg-chat-wallpaper {
+  background-color: var(--tg-wallpaper-color);
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c8cdd1' fill-opacity='0.35'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.dark .tg-chat-wallpaper {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23374751' fill-opacity='0.45'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.tg-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tg-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--tg-scrollbar);
+  border-radius: 9999px;
+}
+
+.tg-scrollbar::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.2);
+}
+
+@layer components {
+  .tg-search-input {
+    @apply w-full border-0 rounded-full px-4 py-2 text-[15px] outline-none transition-colors;
+    background: var(--tg-search-bg);
+    color: var(--tg-title);
+  }
+
+  .tg-search-input::placeholder {
+    color: var(--tg-muted);
+  }
+
+  .tg-search-input:focus {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--tg-blue) 35%, transparent);
+  }
+
+  .tg-btn-icon {
+    @apply flex items-center justify-center w-10 h-10 rounded-full transition-colors;
+    color: var(--tg-muted);
+  }
+
+  .tg-btn-icon:hover {
+    background: var(--tg-hover);
+    color: var(--tg-blue);
+  }
+
+  .tg-btn-primary {
+    @apply font-medium rounded-xl px-5 py-2.5 transition-colors disabled:opacity-50;
+    background: var(--tg-blue);
+    color: #fff;
+  }
+
+  .tg-btn-primary:hover:not(:disabled) {
+    background: var(--tg-blue-hover);
+  }
+
+  .tg-pill-surface {
+    background: var(--tg-pill);
+    color: var(--tg-muted);
+  }
+}
